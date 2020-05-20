@@ -1,0 +1,110 @@
+/*///////////////////// CSS FOR CLASSES ///////////////////////*/
+/*///////////// TITLES ////////////////*/
+.title {
+	color: white;
+	font-family: 'Noto Sans JP', sans-serif;
+}
+.title h1 {
+	font-weight: bold;
+	font-size: 34px;
+	margin-bottom: 0;
+}
+.title h2 {
+	color: #425066;
+	font-size: 30px;
+	font-weight: bold;
+}
+.title p {
+	margin-top: 0;
+	font-size: 24px;
+}
+.title h3 {
+	color: #425066;
+	font-size: 20px;
+}
+
+/*///////////// CARDS ////////////////*/
+.card-style {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+.card-style h4 {
+	color: #425066;
+	transform: skew(19deg, -15deg);
+	padding: 20px;
+	margin: 0;
+}
+.card-style p {
+	color: #425066;
+	transform: skew(19deg, -15deg);
+	margin-left: 30px;
+	margin-top: 0;
+	width: 70%;
+}
+.card-style-image img{
+	width: 100%;
+	border-radius: 8px;
+	transition: transform .5s ease;
+}
+
+/*///////////// CARDS 2 ////////////////*/
+.card-style2 {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+.card-style2 h4 {
+	color: #425066;
+	font-size: 26px;
+	padding-top: 40px;
+	padding-left: 20px;
+	margin: 0;
+}
+.card-style2 p {
+	margin: 0;
+	padding: 20px;
+	color: #425066;
+}
+.card-style2-image img{
+	object-fit: cover;
+	height: 300px;
+	width: 300px;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	transition: transform .5s ease;
+}
+
+/*///////////// CARDS 3 ////////////////*/
+.card-style3 {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+.card-style3 h4 {
+	color: #425066;
+	font-size: 26px;
+	padding-top: 40px;
+	padding-left: 20px;
+	margin: 0;
+}
+.card-style3 p {
+	margin: 0;
+	padding: 20px;
+	color: #425066;
+}
+.card-style3-image img{
+	width: 100%;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	transition: transform .5s ease;
+}
+/*///////////// CARDS 4 ////////////////*/
+.card-style4 {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+.card-style4 h4 {
+	color: #425066;
+	font-size: 22px;
+	margin: 0;
+}
+.card-style4 .top-side p {
+	color: #425066;
+}
+.card-style4 .top-side p span.date {
+	font-size: 10px;
+}

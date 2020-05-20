@@ -1,0 +1,44 @@
+<section id="footer-container">
+    <div id="footer">
+        <div id="links">
+            <div>
+                <label>Socials</label>
+                <ul>
+                    <li>Instagram</li>
+                    <li>Twitter</li>
+                    <li>LinkedIn</li>
+                    <li>Gimbernat</li>
+                </ul>
+            </div>
+            <div>
+                <label>Pages</label>
+                <ul>
+                    <li>Home</li>
+                    <li>News</li>
+                    <li>Hub</li>
+                    <li>Machine Learning</li>
+                </ul>
+            </div>
+            <div>
+                <label>Others</label>
+                <ul>
+                    <li>Register</li>
+                    <li>Sign in</li>
+                </ul>
+            </div>
+        </div>
+        <div id="legal">
+            <div id="terms">
+                <p id="gotoPolicy"><span>Terms</span> | <span>Policy</span></p>
+            </div>
+            <div id="newsletter">
+                <p>Subscribe to the newsletter for updates</p>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $("#gotoPolicy").click(function(){
+        window.location.assign("{% url 'policy' %}")
+    });
+</script>

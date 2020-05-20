@@ -1,0 +1,44 @@
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple ML | News</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simpleml.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simplemlclasses.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> 
+	<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+	{% include 'include/navbar.html' %}
+	<section id="news-container">
+		<div id="news">
+			<div class="title">
+				<h2>Latest updates</h2>
+			</div>
+		{% for new in news %}
+			<div id="card-news">
+				<div class="card-style3">
+					<div class="card-style3-image">
+						<img src="{{ MEDIA_URL }}{{ new.image }}">
+					</div>
+					<div class="card-style3-content">
+						<h4>{{ new.title }}</h4>
+						<p>{{ new.content }}</p>
+						<div id="info">
+							<span id="votes">{{ new.votes }}</span>
+							<span id="author">{{ new.author }}</span>
+							<span id="pub_date">{{ new.pub_date }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</section>
+	{% include 'include/footer.html' %}
+</body>
+</html>

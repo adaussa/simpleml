@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple ML | Hub</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simpleml.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simplemlclasses.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> 
+	<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdn.tiny.cloud/1/6h484io2nunh8km9rmimh3y4lldoicqh6s2qoo7p5csi0vja/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="{% static 'font_awesome/css/all.css' %}" rel="stylesheet">
+    <script>
+        $(function(){
+            $("#add").click(function(){
+                $(this).hide();
+                var html = '<form id="createPost" action="{% url "hub" %}" method="post">'+
+                                '{% csrf_token %}'+
+                                '<h3>New post</h3>'+
+                                '<p><i onclick="closeForm();" class="fa fa-times"></i></p>'+
+                                '<div id="post-title">'+
+                                    '<label class="left" for="title">Title</label>'+
+                                    '<input class="right" type="text" name="title" id="title" size="100" placeholder="max characters 100">'+
+                                '</div>'+
+                                '<div id="post-content">'+
+                                    '<label class="left" for="content">Content</label>'+
+                                    '<textarea class="right" name="content" id="content" placeholder="Roses are red..."></textarea>'+
+                                '</div>'+
+                                '<div id="button-submit">'+
+                                    '<button id="create-click">Post</button>'+
+                                '</div>'+
+                            '</form>';
+                $("#create-post").append(html);
+                tinymce.init({
+                    selector: 'textarea',
+                    force_br_newlines : false,
+                    force_p_newlines : false,
+                    forced_root_block : '',
+                    valid_elements: "*[*]"
+                });
+            });
+
+        });
+
+        function closeForm(){
+            tinymce.remove();
+            $("#add").show();
+            $("#createPost").remove();
+        }
+
+        function openPost(slug){
+            window.location.assign("{% url 'hub' %}"+slug);
+        }
+    </script>
+</head>
+<body>
+    {% include 'include/navbar.html' %}
+    {% if user.is_authenticated %}
+        {% include 'include/createPost.html' %}
+    {% else %}
+    <section id="login-create-container">
+        <div id="login-create">
+            <div class="title">
+                <h3>Log in to create a post</h3>
+                <button id="gotoLogin" class="btn btn-primary">Log in</button>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <section id="posts-list-container">
+        <div id="posts-list">
+            {% for post in posts %}
+            <div class="card-style4" onclick="openPost('{{ post.slug }}')">
+                <div class="top-side">
+                    <p>{{ post.author.username }} </br> <span class="date">{{ post.created_on }}</span></p>
+                    <h4>{{ post.title }}</h4>
+                </div>
+                <div class="mid-side">
+                    {{ post.content|safe }}
+                </div>
+                <div class="bottom-side">
+                    <div class="votes"></div>
+                    <div class="publication"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% include 'include/footer.html' %}
+</body>
+</html>

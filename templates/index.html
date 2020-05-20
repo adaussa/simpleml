@@ -1,0 +1,145 @@
+{% load static %}
+{% load django_simple_cookie_consent_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple ML | Home</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simpleml.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simplemlclasses.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> 
+	<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+		  // Sign up button
+		  	$("#registre").modalForm({formURL: "{% url 'register' %}"});
+			$("#signin").modalForm({formURL: "{% url 'login_user' %}"});
+			$("#logout").click(function(){
+				window.location.assign('{% url "logout" %}');
+			});
+			
+			$(".news_click").click(function(){
+				window.location.assign('{% url "news" %}');
+			});
+			$(".hub_click").click(function(){
+				window.location.assign('{% url "hub" %}');
+			});
+		});
+	</script>
+	{% display_cookie_consent %}
+</head>
+<body>
+	<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content"></div>
+		</div>
+	</div>
+	<section id="background">
+		<div id="stripes">
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		</div>
+	</section>
+	{% block contents %}
+	<section id="topbar-container">
+		<div id="topbar">
+			<div id="menu-list">
+				<span id="img-one"><img src="{% static 'media/images/LogoSimple.png' %}"></span>
+				<span><a>Machine Learning</a></span>
+				<span class="news_click">News</span>
+				<span class="hub_click">Hub</span>
+			</div>
+			{% if user.is_authenticated %}
+			<div id="signed">
+				<span id="username">{{ user.get_username }}</span>
+				<span id="logout"><span>Log out</span></span>
+			</div>
+			{% else %}
+			<div id="sign">
+				<span id="registre">Register</span>
+				<span id="signin"><span>Sign in</span></span>
+			</div>
+			{% endif %}
+		</div>
+	</section>
+	{% endblock %}
+	<section id="presentation-container">
+		<div id="presentation">
+			<div class="title">
+				<h1>Understanding machine learning</h1>
+				<p>A web page for curious people</p>
+			</div>
+			<div id="presentation-extract">
+				<h3>What is Machine Learning?</h3>
+				<p>Machine Learning is a technique that helps software perform tasks without explicit commands or rules. The programmer in this case provides some examples and the computer is in charge of discovering patterns in these examples. We could say that Machine Lerning is programming with data.</p>
+				<button>Get Started</button>
+			</div>
+		</div>
+	</section>
+	<section id="contents-container">
+		<div id="contents">
+			<div class="title">
+				<h2>What can we find in this web</h2>
+			</div>
+			<div id="cards">
+				<div class="card-style  news_click">
+					<div class="card-style-image">
+						<img src="{% static 'media/images/imatge_prova.jpg' %}">
+					</div>
+					<div class="card-style-content">
+						<h4>News</h4>
+						<p>What are the new developments in this sector?</p>
+					</div>
+				</div>
+				<div class="card-style hub_click">
+					<div class="card-style-image">
+						<img src="{% static 'media/images/imatge_prova.jpg' %}">
+					</div>
+					<div class="card-style-content">
+						<h4>Hub</h4>
+						<p>What are the topics that most interest people?</p>
+					</div>
+				</div>
+				<div class="card-style">
+					<div class="card-style-image">
+						<img src="{% static 'media/images/imatge_prova.jpg' %}">
+					</div>
+					<div class="card-style-content">
+						<h4>Machine Learning</h4>
+						<p>Want to try how it works?</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="aboutme-extract-container">
+		<div id="aboutme-extract">
+			<div class="title">
+				<h2>About me</h2>
+			</div>
+			<div id="card-aboutme">
+				<div class="card-style2">
+					<div class="card-style2-image">
+						<img src="{% static 'media/images/imatge_prova.jpg' %}">
+					</div>
+					<div class="card-style2-content">
+						<h4>About me</h4>
+						<p>Hey there! I'm a Web Developer student and this is my final project for my degree. If you want to know more about me click here and find out. Thank you!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% include 'include/footer.html' %}
+</body>
+</html>

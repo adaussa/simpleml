@@ -1,0 +1,53 @@
+{% load static %}
+<script type="text/javascript">
+    $(function () {
+      // Sign up button
+        $("#registre").modalForm({formURL: "{% url 'register' %}"});
+        $("#signin").modalForm({formURL: "{% url 'login_user' %}"});
+        $("#logout").click(function(){
+            window.location.assign('{% url "logout" %}');
+        });
+        $("#gotoLogin").modalForm({formURL: "{% url 'login_user' %}"});
+        
+        $('.home').click(function(){
+            window.location.assign('{% url "index" %}');
+        })
+        $(".news_click").click(function(){
+            window.location.assign('{% url "news" %}');
+        });
+        $(".hub_click").click(function(){
+            window.location.assign('{% url "hub" %}');
+        });
+    });
+</script>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<section id="topbar-container-other">
+    <div id="topbar">
+        <div id="menu-list">
+            <span class="home" id="img-one"><img src="{% static 'media/images/LogoSimple.png' %}"></span>
+            <span>Machine Learning</span>
+            <span class="news_click">News</span>
+            <span class="hub_click">Hub</span>
+        </div>
+        {% if user.is_authenticated %}
+        <div id="signed">
+            <span id="username">{{ user.get_username }}</span>
+            <span id="logout"><span>Log out</span></span>
+        </div>
+        {% else %}
+        <div id="sign">
+            <span id="registre">Register</span>
+            <span id="signin"><span>Sign in</span></span>
+        </div>
+        {% endif %}
+    </div>
+</section>

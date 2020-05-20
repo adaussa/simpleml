@@ -1,0 +1,75 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple ML | Hub</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simpleml.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simplemlclasses.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> 
+	<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdn.tiny.cloud/1/6h484io2nunh8km9rmimh3y4lldoicqh6s2qoo7p5csi0vja/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="{% static 'font_awesome/css/all.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<body>
+    {% include 'include/navbar.html' %}
+    {% if user.is_authenticated %}
+        
+    {% else %}
+    <section id="login-create-container">
+        <div id="login-create">
+            <div class="title">
+                <h3>Log in to comment a post</h3>
+                <button id="gotoLogin">Sign in</button>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <section id="post-complete-container">
+        <div id="post-complete">
+            <div id="title" class="title">
+                <h2>{{ post.title }}</h2>
+            </div>
+            <div id="content">
+                {{ post.content|safe }}
+            </div>
+            <div id="bottom-things">
+                <p>{{ post.author }}</p>
+                <p>{{ post.created_on }}</p>
+            </div>
+        </div>
+    </section>
+    {% if user.is_authenticated %}
+    <section id="post-comment-container">
+        <div id="post-comment">
+            <div class="title">
+                <h3>Comments</h3>
+            </div>
+            <form action="." method="post" id="commentForm">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Comment" class="btn btn-success">
+            </form>
+        </div>
+    </section>
+    {% endif %}
+    <section id="comments-container">
+        <div id="comments">
+            {% for comment in comments %}
+            <div class="comment">
+                <p class="author">{{ comment.author }}<br></vr><span class="date">{{ comment.created_on }}</span></p>
+                <p class="content">{{ comment.content }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% include 'include/footer.html' %}
+</body>
+{% endblock %}
+</html>

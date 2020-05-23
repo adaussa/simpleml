@@ -91,7 +91,7 @@ DATABASES = {
         'NAME' : 'simpleml2',
         'USER' : 'adaussa',
         'PASSWORD' : 'simpleml',
-        'HOST' : '192.168.1.138',
+        'HOST' : '192.168.1.132',
         'PORT' : '3306',
     }
 }

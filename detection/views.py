@@ -3,13 +3,25 @@ from django.core import management
 from .models import Image
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
+from django.core.files.storage import FileSystemStorage
+import subprocess
 # Create your views here.
 
 def ImageRecognition(request):
 
-	filepath = request.FILES.get('filepath', False)
+	if request.method == "POST" and request.FILES['imagePost']:
+		myfile = request.FILES['imagePost']
+		fs = FileSystemStorage()
+		filename = fs.save(myfile.name, myfile)
 
-	if (filepath!=False):
-		return HttpResponse("Hola1")
+		subprocess.call(['./darknet detect cfg/yolov3.cfg yolov3.weights /home/armand/Projectes/SimpleML/simpleml/media/'+myfile.name], shell=True, cwd='/home/armand/Projectes/SimpleML/darknet')
+		subprocess.call(['cp predictions.jpg /home/armand/Projectes/SimpleML/simpleml/media/predictions/'+myfile.name], shell=True, cwd='/home/armand/Projectes/SimpleML/darknet')
+
+		
+		predicted = True
+		file = "predictions/"+myfile.name
+
+		return render(request, 'detection.html', {'file' : file, 'predicted' : predicted})
 	else:
-		return HttpResponse("Hola")
+		predicted = False
+		return render(request, 'detection.html', {'predicted' : predicted})

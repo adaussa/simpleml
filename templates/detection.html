@@ -1,0 +1,55 @@
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple ML | Hub</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simpleml.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/simplemlclasses.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> 
+	<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdn.tiny.cloud/1/6h484io2nunh8km9rmimh3y4lldoicqh6s2qoo7p5csi0vja/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="{% static 'font_awesome/css/all.css' %}" rel="stylesheet">
+    <script>
+        
+    </script>
+</head>
+<body>
+    {% include 'include/navbar.html' %}
+    {% if user.is_authenticated %}
+        
+    {% else %}
+    <section id="login-create-container">
+        <div id="login-create">
+            <div class="title">
+                <h3>Log in to create test de model</h3>
+                <button id="gotoLogin" class="btn btn-primary">Log in</button>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <section id="upload-image-container">
+        <div id="upload-image">
+            <form id="imageUpload" method="post" action="." enctype="multipart/form-data">
+                {%  csrf_token %}
+                <input type="file" name="imagePost">
+                <input type="submit" name="post">
+            </form>
+        </div>
+    </section>
+    {% if predicted %}
+    <section id="image-predicted-container">
+        <div id="image-predicted">
+            <h3>{{ file }}</h3>
+            <img src="{{ MEDIA_URL }}{{ file }}">
+        </div>
+    </section>
+    {% endif %}
+    {% include 'include/footer.html' %}
+</body>
+</html>

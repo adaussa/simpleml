@@ -25,6 +25,7 @@ urlpatterns = [
     #path("register/", v.register, name="register"), 
     path('hub/', include('hub.urls')),
     path('news/', include('news.urls')),
+    path('detection/', include('detection.urls')),
     path('register/', views.SignUpView.as_view(), name='register'),
     path('login_user/', views.user_login, name='login_user'),
     path('logout/', views.user_logout, name='logout'),

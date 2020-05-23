@@ -23,6 +23,9 @@
 			$(".news_click").click(function(){
 				window.location.assign('{% url "news" %}');
 			});
+			$(".ml_click").click(function(){
+				window.location.assign('{% url "detection" %}');
+			});
 			$(".hub_click").click(function(){
 				window.location.assign('{% url "hub" %}');
 			});
@@ -55,7 +58,7 @@
 		<div id="topbar">
 			<div id="menu-list">
 				<span id="img-one"><img src="{% static 'media/images/LogoSimple.png' %}"></span>
-				<span><a>Machine Learning</a></span>
+				<span class="ml_click"><a>Machine Learning</a></span>
 				<span class="news_click">News</span>
 				<span class="hub_click">Hub</span>
 			</div>

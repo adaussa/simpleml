@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'news.apps.NewsConfig',
     'hub',
+    'detection',
     'register.apps.RegisterConfig',
     'bootstrap4',
     'django_simple_cookie_consent',
@@ -90,7 +91,7 @@ DATABASES = {
         'NAME' : 'simpleml2',
         'USER' : 'adaussa',
         'PASSWORD' : 'simpleml',
-        'HOST' : '192.168.56.106',
+        'HOST' : '192.168.1.138',
         'PORT' : '3306',
     }
 }

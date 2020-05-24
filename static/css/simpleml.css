@@ -576,6 +576,58 @@ body {
 	display: flex;
 	justify-content: space-between;
 }
+/*///////////////DETECTION PAGE/////////*/
+#upload-image-container {
+	margin: 0;
+}
+#upload-image {
+	margin: auto;
+	width: 80vw;
+	margin-bottom: 30px;
+	font-family: 'Noto Sans JP', sans-serif;
+}
+#upload-image form #imagePost {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+#upload-image form .active{
+	font-size: 0;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border-left-color: transparent;
+	animation: rotate 1.4s ease 0.5s infinite;
+}
+#upload-image form label {
+	width: 200px;
+	padding: 10px 30px;
+	background-color: var(--mainLighter);
+	color: white;
+	cursor: pointer;
+	text-align: center;
+}
+#image-predicted-container {
+	margin: 0;
+}
+#image-predicted {
+	margin: auto;
+	width: 80vw;
+	margin-bottom: 30px;
+}
+/*/////////////DETECTION TEXT/////////////////*/
+#info-ml-container {
+	margin: 0;
+}
+#info-ml {
+	margin: auto;
+	width: 80vw;
+	margin-bottom: 30px;
+	font-family: 'Noto Sans JP', sans-serif;
+}
 /*////////////COMMENTS FORM/////////////*/
 #post-comment-container {
 	margin: 0;

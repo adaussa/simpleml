@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple ML | Hub</title>
+    <title>Simple ML | Machine Learning</title>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/simpleml.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/simplemlclasses.css' %}">
@@ -16,7 +16,13 @@
     <script src="https://cdn.tiny.cloud/1/6h484io2nunh8km9rmimh3y4lldoicqh6s2qoo7p5csi0vja/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <link href="{% static 'font_awesome/css/all.css' %}" rel="stylesheet">
     <script>
-        
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+        function submitForm(){
+            $("#imageUpload").submit();
+            $("imagePost").addClass("active");
+        }
     </script>
 </head>
 <body>
@@ -27,26 +33,61 @@
     <section id="login-create-container">
         <div id="login-create">
             <div class="title">
-                <h3>Log in to create test de model</h3>
+                <h3>Log in to test de model</h3>
                 <button id="gotoLogin" class="btn btn-primary">Log in</button>
             </div>
         </div>
     </section>
     {% endif %}
+    <section id="info-ml-container">
+        <div id="info-ml">
+            <div class="titleML">
+                <h2>What is Machine Learning?</h2>
+                <p>If you think about it for a minute, everyone knows what Machine Learning is. But if you ask them to explain it to you it’s hard to get a straight answer that will get you out of uncertainty. In this page we’ll see and example of Artificial Intelligence (AI) using  Machine Learning(ML), more accurately Deep Learning(DL).<br>
+                Okay, let me pause. You’re probably confused about all the different titles I just mentioned. Isn’t ML the same as AI, and what is DL?</p>
+                <h3>Artificial Intelligence </h3>
+                <p>As Andrew Ng defined in his Coursera course AI for Everyone, artificial intelligence is “a huge set of tools for making computers behave more intelligently”. This definition, although good, doesn’t really clarify what “behaving intelligently” means. Here are some examples:<br></p>
+                <ul>
+                    <li>Voice assistant (Siri, Cortana)</li>
+                    <li>Recommendation feed (Netflix, Twitter, Facebook)</li>
+                    <li>Self-driving cars (Tesla)</li>
+                    <li>Google Search</li>
+                </ul>
+                <p>What we can recognize here is that AI is a way of automating actions and decisions. It’s also worth noticing that more specifically the examples mentioned are Artificial Narrow Intelligence (ANI), which means that they are algorithms that can perform one task well but nothing else. As opposed to the futuristic approach of Artificial General Intelligence (AGI) which are algorithms that behave human like and can perform multiple tasks. Although AGI sounds very cool it’s something impossible at the moment. <br>
+                Now if AI is a huge set of tools, what are those tools? One example would be Machine Learning.</p>
+                <h3>Machine Learning</h3>
+                <p>ML is used for recommendation systems, content discovery, search engines, email spam filters, etc. You get the point. But this concept is not new, in fact, the first measure we know of ML is test called Touring Test which was performed by Alan Touring in 1950. It consisted in a machine trying to make a human believe that it wasn’t a machine. Yes I know how this sounds, but anyways that was the first record of ML, as you can see it’s not something new.<br>
+                The majority of ML involves computers learning patterns on existing data and the applying it to new data in the form of making predictions. Some examples would be:<br></p>
+                <ul>
+                    <li>Predicting whether a given credit card transaction is fraudulent or not, given transaction details</li>
+                    <li>Predicting whether an email is spam or not, given the email sender, subject and body</li>
+                    <li>Predicting the present and future location of pedestrians, cars and other objects in a video feed</li>
+                </ul>
+                <p>These prediction and classification problems currently form the majority of ML, and are referred as supervised language. The terminology results from the fact that the label you are trying to predict is the same that supervised the learning process. That means that the model is trained with labeled data which in result is the classification that will perform your model later on.<br>
+                That means that is essential in ML models that the quality of the data that you feed to your algorithm to learn from is the best you can provide so when tested results are accurate. This data is commonly called “training data”, and needs to be labeled. What your model do during this training process is recognize patterns in this labeled data to later apply the same rules on unlabeled data.
+                <br>
+                While we’re talking  about ML, let’s also clarify what Deep Learning (DL) is and why it has been receiving a lot of attention recently.</p>
+                <h3>Deep Learning</h3>
+                <p>DL is a form of machine learning that uses algorithms called neural networks, which are loosely inspired by biological neural networks in human brains. The majority of applications in DL occur in the form of supervised learning image classification and natural language processing (Google Transalte).<br>
+                It’s important to emphasize that DL systems are rarely good at more than one task: an algorithm that is built for facial recognition will not be any good at classifying legal documents. This is to say that, you may like to call DL a form of AI, it is so in the sense of artificial narrow intelligence (ANI), not artificial general intelligence (AGI).</p>
+                <h3>So what?</h3>
+                <p>Is ML  a form of AI? Colloquially, yes, machine learning is regarded as a form of artificial intelligence, but if we are thinking AI as a “set of tools for making computers behave more intelligently” then ML becomes one of those tools.</p>
+            </div>
+        </div>
+    </section>
     <section id="upload-image-container">
         <div id="upload-image">
             <form id="imageUpload" method="post" action="." enctype="multipart/form-data">
                 {%  csrf_token %}
-                <input type="file" name="imagePost">
-                <input type="submit" name="post">
+                <input type="file" name="imagePost" id="imagePost" accept="image/jpeg" onchange="submitForm()">
+                <label for="imagePost">Choose a file</label>
             </form>
         </div>
     </section>
     {% if predicted %}
     <section id="image-predicted-container">
         <div id="image-predicted">
-            <h3>{{ file }}</h3>
-            <img src="{{ MEDIA_URL }}{{ file }}">
+            <img src="{{ MEDIA_URL }}{{ file }}" width="100%">
         </div>
     </section>
     {% endif %}

@@ -22,7 +22,26 @@
 	color: #425066;
 	font-size: 20px;
 }
-
+/*///////////// TITLES FOR ML ////////////////*/
+.titleML {
+	color: #425066;
+	font-family: 'Noto Sans JP', sans-serif;
+}
+.titleML h1 {
+	font-weight: bold;
+	font-size: 34px;
+	margin-bottom: 0;
+}
+.titleML h2 {
+	font-size: 30px;
+	font-weight: bold;
+}
+.titleML p {
+	margin-top: 0;
+}
+.titleML h3 {
+	font-size: 20px;
+}
 /*///////////// CARDS ////////////////*/
 .card-style {
 	font-family: 'Noto Sans JP', sans-serif;

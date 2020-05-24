@@ -16,7 +16,7 @@ def ImageRecognition(request):
 
 		subprocess.call(['./darknet detect cfg/yolov3.cfg yolov3.weights /home/armand/Projectes/SimpleML/simpleml/media/'+myfile.name], shell=True, cwd='/home/armand/Projectes/SimpleML/darknet')
 		subprocess.call(['cp predictions.jpg /home/armand/Projectes/SimpleML/simpleml/media/predictions/'+myfile.name], shell=True, cwd='/home/armand/Projectes/SimpleML/darknet')
-
+		subprocess.call(['rm '+myfile.name], shell=True, cwd='/home/armand/Projectes/SimpleML/simpleml/media/')
 		
 		predicted = True
 		file = "predictions/"+myfile.name

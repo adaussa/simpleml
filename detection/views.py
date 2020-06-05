@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.core import management
 from .models import Image
@@ -9,7 +10,7 @@ import subprocess
 
 def ImageRecognition(request):
 
-	if request.method == "POST" and request.FILES['imagePost']:
+	if request.is_ajax() and request.method == "POST" and request.FILES['imagePost']:
 		myfile = request.FILES['imagePost']
 		fs = FileSystemStorage()
 		filename = fs.save(myfile.name, myfile)
@@ -21,7 +22,10 @@ def ImageRecognition(request):
 		predicted = True
 		file = "predictions/"+myfile.name
 
-		return render(request, 'detection.html', {'file' : file, 'predicted' : predicted})
+		jsonResponse = {'file' : file, 'predicted' : predicted}
+
+		return HttpResponse(json.dumps(jsonResponse),
+            content_type='application/json')
 	else:
 		predicted = False
 		return render(request, 'detection.html', {'predicted' : predicted})

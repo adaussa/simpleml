@@ -19,9 +19,34 @@
         if ( window.history.replaceState ) {
             window.history.replaceState( null, null, window.location.href );
         }
-        function submitForm(){
-            $("#imageUpload").submit();
-            $("imagePost").addClass("active");
+
+        function submitForm() {
+            $("#label").hide();
+            addDots();
+            var data = new FormData($('#imageUpload').get(0));
+
+            $.ajax({
+                url: $('#imageUpload').attr('action'),
+                type: $('#imageUpload').attr('method'),
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    $("#image-predicted").append('<img src="{{ MEDIA_URL }}'+data.file+'" width="100%">');
+                    $(".loading").remove();
+                    $("#label").show();
+                }
+            });
+        }
+
+        function addDots(){
+            var html = "<div class='loading'>"+
+                            "<span></span>"+
+                            "<span></span>"+
+                            "<span></span>"+
+                        "</div>";
+            $("#animation").append(html);
         }
     </script>
 </head>
@@ -77,20 +102,19 @@
     </section>
     <section id="upload-image-container">
         <div id="upload-image">
-            <form id="imageUpload" method="post" action="." enctype="multipart/form-data">
+            <form id="imageUpload" method="post" action=".">
                 {%  csrf_token %}
                 <input type="file" name="imagePost" id="imagePost" accept="image/jpeg" onchange="submitForm()">
-                <label for="imagePost">Choose a file</label>
+                <div id="animation">
+                    <label for="imagePost" id="label">Choose a file</label>
+                </div>
             </form>
         </div>
     </section>
-    {% if predicted %}
     <section id="image-predicted-container">
         <div id="image-predicted">
-            <img src="{{ MEDIA_URL }}{{ file }}" width="100%">
         </div>
     </section>
-    {% endif %}
     {% include 'include/footer.html' %}
 </body>
 </html>

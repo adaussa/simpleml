@@ -11,6 +11,7 @@
 	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> 
 	<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<link href="{% static 'font_awesome/css/all.css' %}" rel="stylesheet">
 </head>
 <body>
 	{% include 'include/navbar.html' %}
@@ -28,8 +29,9 @@
 					<div class="card-style3-content">
 						<h4>{{ new.title }}</h4>
 						<p>{{ new.content }}</p>
+						<p><a href="{{ new.link }}">Visit site here</a></p>
 						<div id="info">
-							<span id="votes">{{ new.votes }}</span>
+							<span id="votes"><i class="fa fa-heart" title="Like this new">{{ new.votes }}</i></span>
 							<span id="author">{{ new.author }}</span>
 							<span id="pub_date">{{ new.pub_date }}</span>
 						</div>

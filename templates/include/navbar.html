@@ -18,6 +18,9 @@
         $(".hub_click").click(function(){
             window.location.assign('{% url "hub" %}');
         });
+        $(".ml_click").click(function(){
+            window.location.assign('{% url "detection" %}');
+        });
     });
 </script>
 <div class="modal fade" tabindex="-1" role="dialog" id="modal">
@@ -34,7 +37,7 @@
     <div id="topbar">
         <div id="menu-list">
             <span class="home" id="img-one"><img src="{% static 'media/images/LogoSimple.png' %}"></span>
-            <span>Machine Learning</span>
+            <span class="ml_click">Machine Learning</span>
             <span class="news_click">News</span>
             <span class="hub_click">Hub</span>
         </div>

@@ -242,7 +242,7 @@ body {
 	position: relative;
 	margin-top: 30vh;
 	width: 40%;
-	height: 250px;
+	height: 300px;
 	display: inline-block;
 	float: right;
 	background-color: white;
@@ -259,6 +259,7 @@ body {
 }
 #presentation #presentation-extract p{
 	margin-top: 0;
+	margin-bottom: 100px;
 	color: #616161;
 }
 #presentation #presentation-extract button{
@@ -594,21 +595,48 @@ body {
 	position: absolute;
 	z-index: -1;
 }
-#upload-image form .active{
-	font-size: 0;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	border-left-color: transparent;
-	animation: rotate 1.4s ease 0.5s infinite;
+#upload-image form #animation label {
+	margin: 0;
+	font-weight: bold;
+	transition: ease .4s;
+	cursor: pointer;
 }
-#upload-image form label {
+#upload-image form #animation {
+	display: inline-block;
 	width: 200px;
+	height: 50px;
 	padding: 10px 30px;
 	background-color: var(--mainLighter);
+	border: 2px solid var(--mainLighter);
 	color: white;
 	cursor: pointer;
 	text-align: center;
+	box-sizing: border-box;
+	transition: all ease 0.5s;
+}
+#upload-image form #animation .loading span {
+	width: 15px;
+	height: 15px;
+	margin: 0 5px;
+	background-color: white;
+	border-radius: 50%;
+	display: inline-block;
+	animation-name: dots;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out; 
+}
+#upload-image form #animation .loading span:nth-child(2) {
+	animation-delay: 0.4s;
+}
+#upload-image form #animation .loading span:nth-child(3) {
+	animation-delay: 0.8s;
+}
+@keyframes dots{
+	50%{
+		opacity: 0;
+		transform: scale(0.7) translateY(10px);
+	}
 }
 #image-predicted-container {
 	margin: 0;
